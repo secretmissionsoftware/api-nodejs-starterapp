@@ -1,23 +1,83 @@
 import React from 'react'
-import Button from 'react-bootstrap/Button'
-import Jumbotron from 'react-bootstrap/Jumbotron'
+import { Button, Jumbotron, Container, Row, Col, Card } from 'react-bootstrap'
+
 import Page from './_page'
 
-const Index: React.FC = () => {
-	return (
-		<Page>
-			<Jumbotron>
-				<h1>Hello, world!</h1>
-				<p>
-					This is a simple hero unit, a simple jumbotron-style component for
-					calling extra attention to featured content or information.
-				</p>
-				<p>
-					<Button variant="primary">Learn more</Button>
-				</p>
-			</Jumbotron>
-		</Page>
-	)
+type IndexProps = {
+	callbackUrl: string
 }
+
+const Index = ({ callbackUrl }: IndexProps) => (
+	<Page>
+		<Jumbotron>
+			<Container>
+				<h1 className="display-4">FreshBooks 🤝 SquareSpace</h1>
+				<p className="lead">
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+				</p>
+				<hr className="my-4" />
+				<Button href={callbackUrl}>Get started</Button>
+			</Container>
+		</Jumbotron>
+
+		<Container>
+			<Row>
+				<Col md={4}>
+					<Card>
+						<Card.Body>
+							<Card.Title>Inventory</Card.Title>
+							<Card.Text>
+								Nullam rutrum tellus ut metus congue rhoncus. Curabitur ultrices
+								risus sit amet magna ullamcorper suscipit.
+							</Card.Text>
+						</Card.Body>
+					</Card>
+				</Col>
+				<Col md={4}>
+					<Card>
+						<Card.Body>
+							<Card.Title>Inventory</Card.Title>
+							<Card.Text>
+								Nullam rutrum tellus ut metus congue rhoncus. Curabitur ultrices
+								risus sit amet magna ullamcorper suscipit.
+							</Card.Text>
+						</Card.Body>
+					</Card>
+				</Col>
+				<Col md={4}>
+					<Card>
+						<Card.Body>
+							<Card.Title>Inventory</Card.Title>
+							<Card.Text>
+								Nullam rutrum tellus ut metus congue rhoncus. Curabitur ultrices
+								risus sit amet magna ullamcorper suscipit.
+							</Card.Text>
+						</Card.Body>
+					</Card>
+				</Col>
+			</Row>
+		</Container>
+		<nav className="navbar fixed-bottom navbar-expand-lg navbar-dark bg-primary">
+			<div className="container">
+				<a className="navbar-brand" href="#">
+					FreshBooks + Squarespace
+				</a>
+				<ul className="navbar-nav mr-auto">
+					<li className="nav-item">
+						<a className="nav-link" href="#">
+							FAQ
+						</a>
+					</li>
+					<li className="nav-item">
+						<a className="nav-link" href="#">
+							Support
+						</a>
+					</li>
+				</ul>
+				<span className="navbar-text">Made with ❤️ in Toronto, Canada</span>
+			</div>
+		</nav>
+	</Page>
+)
 
 export default Index

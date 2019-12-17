@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import { SessionUser } from '@freshbooks/app/dist/PassportStrategy'
+import { Client } from '@freshbooks/api'
 
 const router = Router()
 
@@ -12,9 +13,19 @@ router.use((req, res, next) => {
 	}
 })
 
-router.get('/dashboard', (req, res) => {
+router.get('/dashboard', async (req, res) => {
 	const user = req.user as SessionUser
-	res.send(`Hello ${user.id}`)
+	if (user.token) {
+		const client = new Client(user.token || '')
+		const { data } = await client.users.me()
+		// const { accountId } = data.businessMemberships
+		// 	? data.businessMemberships[0].business
+		// 	: { accountId: '' }
+		// const {
+		// 	data: { payments },
+		// } = await client.payments.list(data)
+		res.render('dashboard', data)
+	} else res.redirect('/')
 })
 
 router.get('/logout', (req, res) => {
