@@ -1,10 +1,13 @@
 import React from 'react'
-import { Button, Jumbotron, Container, Row, Col } from 'react-bootstrap'
-
+import Button from 'react-bootstrap/Button'
+import Col from 'react-bootstrap/Col'
+import Container from 'react-bootstrap/Container'
+import Jumbotron from 'react-bootstrap/Jumbotron'
+import Row from 'react-bootstrap/Row'
 import Page from './_page'
 
 const Index: React.FC = () => (
-	<Page>
+	<Page title="Hello, world">
 		<Jumbotron>
 			<Container>
 				<h1 className="display-4">Hello, world!</h1>
@@ -13,15 +16,15 @@ const Index: React.FC = () => (
 				</p>
 				<hr className="my-4" />
 				<p>
+					<Button href={process.env.CALLBACK_URL} className="mr-2">
+						Get started
+					</Button>
 					<Button
-						variant="primary"
+						variant="secondary"
 						href="https://github.com/freshbooks/api-nodejs-starterapp"
 					>
 						View on Github
 					</Button>
-				</p>
-				<p>
-					<Button href={process.env.CALLBACK_URL}>Get started</Button>
 				</p>
 			</Container>
 		</Jumbotron>
