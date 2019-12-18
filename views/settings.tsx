@@ -1,7 +1,10 @@
 import React from 'react'
-import { Button, Jumbotron, Container, Row, Col } from 'react-bootstrap'
-
+import Button from 'react-bootstrap/Button'
+import Col from 'react-bootstrap/Col'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
 import Page from './_page'
+
 const Settings: React.FC = () => (
 	<Page>
 		<nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -17,12 +20,9 @@ const Settings: React.FC = () => (
 			</Container>
 		</nav>
 		<Container className="pt-4">
-			<Row>
-				<Col>
-					<h3>Settings</h3>
-				</Col>
+			<Row className="mb-2" noGutters>
+				<h3>Settings</h3>
 			</Row>
-
 			<Row>
 				<Col>
 					<Button variant="danger" href="logout">
@@ -34,9 +34,8 @@ const Settings: React.FC = () => (
 		<nav className="navbar fixed-bottom navbar-expand-lg navbar-dark bg-primary">
 			<Container>
 				<a className="navbar-brand" href="#">
-					Freshbooks Starterapp
+					Freshbooks Starter
 				</a>
-				<span className="navbar-text">Made with ❤️ in Toronto, Canada</span>
 			</Container>
 		</nav>
 	</Page>

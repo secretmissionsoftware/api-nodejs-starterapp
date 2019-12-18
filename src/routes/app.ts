@@ -15,30 +15,34 @@ router.use((req, res, next) => {
 
 router.get('/dashboard', async (req, res) => {
 	const user = req.user as SessionUser
-	if (user.token) {
-		const client = new Client(user.token || '')
-		const { data } = await client.users.me()
-		let propData = data as any
-		let accountId = ''
-		if (data && data.businessMemberships && data.businessMemberships.length) {
-			;({ accountId } = data.businessMemberships[0].business)
-		}
+	const client = new Client(user.token || '')
+	const { data: me } = await client.users.me()
 
-		if (accountId) {
-			const { data: paymentData } = await client.payments.list(accountId)
-			const paymentCount = paymentData ? paymentData.payments.length : 0
+	// fetch first business account
+	if (me && me.businessMemberships && me.businessMemberships.length) {
+		const { accountId } = me.businessMemberships[0].business
 
-			const { data: expenseData } = await client.expenses.list(accountId)
-			const expenseCount = expenseData ? expenseData.expenses.length : 0
+		const { data: itemData } = await client.items.list(accountId)
+		const itemCount: number = itemData ? itemData.items.length : 0
 
-			propData = { ...propData, paymentCount, expenseCount }
-		}
-		res.render('dashboard', propData)
-	} else res.redirect('/')
+		const { data: invoiceData } = await client.invoices.list(accountId)
+		const invoiceCount: number = invoiceData ? invoiceData.invoices.length : 0
+
+		const { data: paymentData } = await client.payments.list(accountId)
+		const paymentCount: number = paymentData ? paymentData.payments.length : 0
+
+		res.render('dashboard', {
+			me,
+			items: itemCount,
+			payments: paymentCount,
+			invoices: invoiceCount,
+		})
+	} else {
+		res.sendStatus(500)
+	}
 })
 
 router.get('/settings', async (req, res) => {
-	const user = req.user as SessionUser
 	res.render('settings')
 })
 

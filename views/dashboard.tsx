@@ -1,21 +1,31 @@
-import React from 'react'
+import React, { FC } from 'react'
 import User from '@freshbooks/api/dist/models/User'
+import Card from 'react-bootstrap/Card'
+import Col from 'react-bootstrap/Col'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
 import Page from './_page'
-import { Container, Row, Col, Card } from 'react-bootstrap'
 
-const Dashboard = ({
-	firstName,
-	lastName,
-	paymentCount,
-	expenseCount,
-}: any) => {
+interface Props {
+	me: User
+	items: number
+	invoices: number
+	payments: number
+}
+
+const Dashboard: React.FC<Props> = ({
+	me,
+	items,
+	invoices,
+	payments,
+}: Props) => {
 	return (
-		<Page>
+		<Page title="Dashboard">
 			<div>
 				<nav className="navbar navbar-expand-lg navbar-light bg-light">
 					<Container>
 						<a className="navbar-brand" href="#">
-							FreshBooks + Squarespace
+							FreshBooks Starter
 						</a>
 						<div className="d-flex justify-content-end">
 							<a className="btn btn-secondary btn-large" href="settings">
@@ -25,50 +35,46 @@ const Dashboard = ({
 					</Container>
 				</nav>
 				<Container className="pt-4">
-					{`${firstName} ${lastName}`}
+					<Row className="mb-2" noGutters>
+						<h3>Hello, {`${me.firstName} ${me.lastName}`}</h3>
+					</Row>
 					<Row>
-						<Col md={8}>
-							<h3>Recent activity</h3>
-							<table className="table">
-								<thead>
-									<tr>
-										<th scope="col">Type</th>
-										<th scope="col">Event</th>
-										<th scope="col">Date</th>
-										<th scope="col">Status</th>
-									</tr>
-								</thead>
-								<tbody></tbody>
-							</table>
-						</Col>
-
-						<Col md={4}>
-							<Card className="mb-4">
-								<Card.Header>Inventory</Card.Header>
+						<Col>
+							<Card>
+								<Card.Header>Items</Card.Header>
 								<Card.Body>
 									<Card.Title>
-										<h1>{paymentCount}</h1>
+										<h1>{items}</h1>
 									</Card.Title>
 									<Card.Subtitle>
-										<h6 className="mb-2 text-muted">items synced</h6>
+										<h6 className="mb-2 text-muted">items</h6>
 									</Card.Subtitle>
-									<Card.Text className="small">
-										Last synced: January 01, 2019 12:00:01 am
-									</Card.Text>
 								</Card.Body>
 							</Card>
-							<Card className="mb-4">
-								<Card.Header>Inventory</Card.Header>
+						</Col>
+						<Col>
+							<Card>
+								<Card.Header>Invoices</Card.Header>
 								<Card.Body>
 									<Card.Title>
-										<h1>{expenseCount}</h1>
+										<h1>{invoices}</h1>
 									</Card.Title>
 									<Card.Subtitle>
-										<h6 className="mb-2 text-muted">items synced</h6>
+										<h6 className="mb-2 text-muted">invoices</h6>
 									</Card.Subtitle>
-									<Card.Text className="small">
-										Last synced: January 01, 2019 12:00:01 am
-									</Card.Text>
+								</Card.Body>
+							</Card>
+						</Col>
+						<Col>
+							<Card>
+								<Card.Header>Payments</Card.Header>
+								<Card.Body>
+									<Card.Title>
+										<h1>{payments}</h1>
+									</Card.Title>
+									<Card.Subtitle>
+										<h6 className="mb-2 text-muted">payments</h6>
+									</Card.Subtitle>
 								</Card.Body>
 							</Card>
 						</Col>
@@ -77,21 +83,8 @@ const Dashboard = ({
 				<nav className="navbar fixed-bottom navbar-expand-lg navbar-dark bg-primary">
 					<Container>
 						<a className="navbar-brand" href="#">
-							FreshBooks + Squarespace
+							FreshBooks Starter
 						</a>
-						<ul className="navbar-nav mr-auto">
-							<li className="nav-item">
-								<a className="nav-link" href="#">
-									FAQ
-								</a>
-							</li>
-							<li className="nav-item">
-								<a className="nav-link" href="#">
-									Support
-								</a>
-							</li>
-						</ul>
-						<span className="navbar-text">Made with ❤️ in Toronto, Canada</span>
 					</Container>
 				</nav>
 			</div>
