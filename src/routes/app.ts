@@ -18,14 +18,28 @@ router.get('/dashboard', async (req, res) => {
 	if (user.token) {
 		const client = new Client(user.token || '')
 		const { data } = await client.users.me()
-		// const { accountId } = data.businessMemberships
-		// 	? data.businessMemberships[0].business
-		// 	: { accountId: '' }
-		// const {
-		// 	data: { payments },
-		// } = await client.payments.list(data)
-		res.render('dashboard', data)
+		let propData = data as any
+		let accountId = ''
+		if (data && data.businessMemberships && data.businessMemberships.length) {
+			;({ accountId } = data.businessMemberships[0].business)
+		}
+
+		if (accountId) {
+			const { data: paymentData } = await client.payments.list(accountId)
+			const paymentCount = paymentData ? paymentData.payments.length : 0
+
+			const { data: expenseData } = await client.expenses.list(accountId)
+			const expenseCount = expenseData ? expenseData.expenses.length : 0
+
+			propData = { ...propData, paymentCount, expenseCount }
+		}
+		res.render('dashboard', propData)
 	} else res.redirect('/')
+})
+
+router.get('/settings', async (req, res) => {
+	const user = req.user as SessionUser
+	res.render('settings')
 })
 
 router.get('/logout', (req, res) => {

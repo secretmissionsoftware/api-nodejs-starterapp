@@ -1,79 +1,57 @@
 import React from 'react'
-import { Button, Jumbotron, Container, Row, Col, Card } from 'react-bootstrap'
+import { Button, Jumbotron, Container, Row, Col } from 'react-bootstrap'
 
 import Page from './_page'
 
-type IndexProps = {
-	callbackUrl: string
-}
-
-const Index = ({ callbackUrl }: IndexProps) => (
+const Index: React.FC = () => (
 	<Page>
 		<Jumbotron>
 			<Container>
-				<h1 className="display-4">FreshBooks 🤝 SquareSpace</h1>
+				<h1 className="display-4">Hello, world!</h1>
 				<p className="lead">
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+					Congratulations on setting up your FreshBooks NodeJS app!
 				</p>
 				<hr className="my-4" />
-				<Button href={callbackUrl}>Get started</Button>
+				<p>
+					<Button
+						variant="primary"
+						href="https://github.com/freshbooks/api-nodejs-starterapp"
+					>
+						View on Github
+					</Button>
+				</p>
+				<p>
+					<Button href={process.env.CALLBACK_URL}>Get started</Button>
+				</p>
 			</Container>
 		</Jumbotron>
 
 		<Container>
+			<h2>Configuration</h2>
 			<Row>
-				<Col md={4}>
-					<Card>
-						<Card.Body>
-							<Card.Title>Inventory</Card.Title>
-							<Card.Text>
-								Nullam rutrum tellus ut metus congue rhoncus. Curabitur ultrices
-								risus sit amet magna ullamcorper suscipit.
-							</Card.Text>
-						</Card.Body>
-					</Card>
+				<Col>
+					<strong>Client ID:</strong>
 				</Col>
-				<Col md={4}>
-					<Card>
-						<Card.Body>
-							<Card.Title>Inventory</Card.Title>
-							<Card.Text>
-								Nullam rutrum tellus ut metus congue rhoncus. Curabitur ultrices
-								risus sit amet magna ullamcorper suscipit.
-							</Card.Text>
-						</Card.Body>
-					</Card>
+				<Col xs={10}>{process.env.CLIENT_ID}</Col>
+			</Row>
+			<Row>
+				<Col>
+					<strong>Redirect URL:</strong>
 				</Col>
-				<Col md={4}>
-					<Card>
-						<Card.Body>
-							<Card.Title>Inventory</Card.Title>
-							<Card.Text>
-								Nullam rutrum tellus ut metus congue rhoncus. Curabitur ultrices
-								risus sit amet magna ullamcorper suscipit.
-							</Card.Text>
-						</Card.Body>
-					</Card>
+				<Col xs={10}>{process.env.CALLBACK_URL}</Col>
+			</Row>
+			<Row>
+				<Col>
+					<strong>Authorization URL:</strong>
 				</Col>
+				<Col xs={10}>{process.env.AUTHORIZATION_URL}</Col>
 			</Row>
 		</Container>
 		<nav className="navbar fixed-bottom navbar-expand-lg navbar-dark bg-primary">
 			<div className="container">
 				<a className="navbar-brand" href="#">
-					FreshBooks + Squarespace
+					FreshBooks Starterapp
 				</a>
-				<ul className="navbar-nav mr-auto">
-					<li className="nav-item">
-						<a className="nav-link" href="#">
-							FAQ
-						</a>
-					</li>
-					<li className="nav-item">
-						<a className="nav-link" href="#">
-							Support
-						</a>
-					</li>
-				</ul>
 				<span className="navbar-text">Made with ❤️ in Toronto, Canada</span>
 			</div>
 		</nav>

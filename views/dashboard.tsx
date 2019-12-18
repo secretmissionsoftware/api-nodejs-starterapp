@@ -3,7 +3,12 @@ import User from '@freshbooks/api/dist/models/User'
 import Page from './_page'
 import { Container, Row, Col, Card } from 'react-bootstrap'
 
-const Dashboard = ({ firstName, lastName }: User) => {
+const Dashboard = ({
+	firstName,
+	lastName,
+	paymentCount,
+	expenseCount,
+}: any) => {
 	return (
 		<Page>
 			<div>
@@ -13,7 +18,7 @@ const Dashboard = ({ firstName, lastName }: User) => {
 							FreshBooks + Squarespace
 						</a>
 						<div className="d-flex justify-content-end">
-							<a className="btn btn-secondary btn-large" href="settings.html">
+							<a className="btn btn-secondary btn-large" href="settings">
 								Settings
 							</a>
 						</div>
@@ -42,7 +47,7 @@ const Dashboard = ({ firstName, lastName }: User) => {
 								<Card.Header>Inventory</Card.Header>
 								<Card.Body>
 									<Card.Title>
-										<h1>124</h1>
+										<h1>{paymentCount}</h1>
 									</Card.Title>
 									<Card.Subtitle>
 										<h6 className="mb-2 text-muted">items synced</h6>
@@ -56,7 +61,7 @@ const Dashboard = ({ firstName, lastName }: User) => {
 								<Card.Header>Inventory</Card.Header>
 								<Card.Body>
 									<Card.Title>
-										<h1>124</h1>
+										<h1>{expenseCount}</h1>
 									</Card.Title>
 									<Card.Subtitle>
 										<h6 className="mb-2 text-muted">items synced</h6>
